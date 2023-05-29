@@ -12,7 +12,7 @@ export class Student {
   class: string;
 
   @Prop()
-  classTeacher: string;
+  classTeacher: string; //ObjectId
 
   @Prop()
   attendance: boolean;
