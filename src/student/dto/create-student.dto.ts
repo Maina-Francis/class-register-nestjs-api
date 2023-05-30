@@ -1,5 +1,10 @@
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
+export interface attendanceInterface {
+  date: string;
+  status: boolean;
+}
+
 export class CreateStudentDTO {
   @IsString()
   @IsNotEmpty()
@@ -11,13 +16,12 @@ export class CreateStudentDTO {
 
   @IsString()
   @IsNotEmpty()
-  class: string;
+  classId: string;
 
   @IsString()
   @IsNotEmpty()
   classTeacher: string; //ObjectId
 
-  @IsBoolean()
   @IsNotEmpty()
-  attendance: boolean;
+  attendance: attendanceInterface;
 }

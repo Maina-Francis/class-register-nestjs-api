@@ -1,7 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, SchemaTypes } from 'mongoose';
+import { attendanceInterface } from '../dto/create-student.dto';
 
 @Schema()
-export class Student {
+export class Student extends Document {
   @Prop()
   firstName: string;
 
@@ -9,13 +11,10 @@ export class Student {
   lastName: string;
 
   @Prop()
-  class: string;
+  classId: string;
 
-  @Prop()
-  classTeacher: string; //ObjectId
-
-  @Prop()
-  attendance: boolean;
+  @Prop({ type: SchemaTypes.Mixed })
+  attendance: attendanceInterface;
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
