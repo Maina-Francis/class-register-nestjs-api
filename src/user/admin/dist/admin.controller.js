@@ -48,8 +48,9 @@ exports.__esModule = true;
 exports.AdminController = void 0;
 var common_1 = require("@nestjs/common");
 var AdminController = /** @class */ (function () {
-    function AdminController(adminService) {
+    function AdminController(adminService, studentService) {
         this.adminService = adminService;
+        this.studentService = studentService;
     }
     AdminController.prototype.getStudents = function () {
         return __awaiter(this, void 0, Promise, function () {
@@ -72,6 +73,17 @@ var AdminController = /** @class */ (function () {
             });
         });
     };
+    //   create a new student
+    AdminController.prototype.createStudent = function (createStudentDto) {
+        return __awaiter(this, void 0, Promise, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.studentService.createStudent(createStudentDto)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     __decorate([
         common_1.Get('students')
     ], AdminController.prototype, "getStudents");
@@ -80,6 +92,10 @@ var AdminController = /** @class */ (function () {
         __param(0, common_1.Param('id')),
         __param(1, common_1.Body())
     ], AdminController.prototype, "updateStudent");
+    __decorate([
+        common_1.Post(),
+        __param(0, common_1.Body())
+    ], AdminController.prototype, "createStudent");
     AdminController = __decorate([
         common_1.Controller('admin')
     ], AdminController);
