@@ -16,7 +16,7 @@ export class CreateStudentDTO {
 
   @IsString()
   @IsNotEmpty()
-  classId: string;
+  class: string;
 
   @IsString()
   @IsNotEmpty()

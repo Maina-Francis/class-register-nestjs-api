@@ -58,6 +58,19 @@ export class StudentService {
     return student;
   }
 
+  // get students by classId
+  async getStudentsByClassId(classId: string): Promise<Student[]> {
+    const students = await this.studentModel.find({ class: classId }).exec();
+
+    // validate whether there are students in the class
+
+    if (!students || students.length === 0) {
+      throw new NotFoundException(`No students in class #${classId} found`);
+    }
+
+    return students;
+  }
+
   //   delete a student by id
   async deleteStudent(studentId: string): Promise<Student> {
     const deletedStudent = await this.studentModel

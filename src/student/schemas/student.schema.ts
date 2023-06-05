@@ -11,7 +11,7 @@ export class Student extends Document {
   lastName: string;
 
   @Prop()
-  classId: string;
+  class: string;
 
   @Prop({ type: SchemaTypes.Mixed })
   attendance: attendanceInterface;

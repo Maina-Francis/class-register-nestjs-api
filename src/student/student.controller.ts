@@ -47,6 +47,14 @@ export class StudentController {
     return await this.studentService.getStudentById(studentId);
   }
 
+  // get students by classId
+  @Get('/class/:classId')
+  async getStudentsByClassId(
+    @Param('classId') classId: string,
+  ): Promise<Student[]> {
+    return await this.studentService.getStudentsByClassId(classId);
+  }
+
   //   delete a student by id
   @Delete(':id')
   async deleteStudent(@Param('id') studentId: string): Promise<Student> {

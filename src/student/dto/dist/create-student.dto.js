@@ -22,7 +22,7 @@ var CreateStudentDTO = /** @class */ (function () {
     __decorate([
         class_validator_1.IsString(),
         class_validator_1.IsNotEmpty()
-    ], CreateStudentDTO.prototype, "classId");
+    ], CreateStudentDTO.prototype, "class");
     __decorate([
         class_validator_1.IsString(),
         class_validator_1.IsNotEmpty()
