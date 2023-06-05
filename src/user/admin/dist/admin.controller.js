@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -58,9 +61,25 @@ var AdminController = /** @class */ (function () {
             });
         });
     };
+    //   Update a Student
+    AdminController.prototype.updateStudent = function (studentId, updateStudentDto) {
+        return __awaiter(this, void 0, Promise, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.adminService.updateStudent(studentId, updateStudentDto)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     __decorate([
         common_1.Get('students')
     ], AdminController.prototype, "getStudents");
+    __decorate([
+        common_1.Put(':id'),
+        __param(0, common_1.Param('id')),
+        __param(1, common_1.Body())
+    ], AdminController.prototype, "updateStudent");
     AdminController = __decorate([
         common_1.Controller('admin')
     ], AdminController);

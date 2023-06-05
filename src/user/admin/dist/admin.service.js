@@ -69,6 +69,26 @@ var AdminService = /** @class */ (function () {
             });
         });
     };
+    //   Update a Student
+    AdminService.prototype.updateStudent = function (studentId, updateStudentDto) {
+        return __awaiter(this, void 0, Promise, function () {
+            var existingStudent;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.studentModel.findByIdAndUpdate(studentId, updateStudentDto, {
+                            "new": true
+                        })];
+                    case 1:
+                        existingStudent = _a.sent();
+                        // validate whether the student exists
+                        if (!existingStudent) {
+                            throw new common_1.NotFoundException("Student #" + studentId + " not found");
+                        }
+                        return [2 /*return*/, existingStudent];
+                }
+            });
+        });
+    };
     AdminService = __decorate([
         common_1.Injectable(),
         __param(0, mongoose_1.InjectModel('Student'))
