@@ -95,7 +95,7 @@ var StudentService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.studentModel.find()];
                     case 1:
                         studentData = _a.sent();
-                        if (!studentData) {
+                        if (!studentData || studentData.length === 0) {
                             throw new common_1.NotFoundException("Students data not found");
                         }
                         return [2 /*return*/, studentData];

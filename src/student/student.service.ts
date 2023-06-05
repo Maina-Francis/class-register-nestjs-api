@@ -39,7 +39,7 @@ export class StudentService {
   async getAllStudents(): Promise<Student[]> {
     const studentData = await this.studentModel.find();
 
-    if (!studentData) {
+    if (!studentData || studentData.length === 0) {
       throw new NotFoundException(`Students data not found`);
     }
 

@@ -12,11 +12,21 @@ var admin_controller_1 = require("./admin/admin.controller");
 var teacher_controller_1 = require("./teacher/teacher.controller");
 var teacher_service_1 = require("./teacher/teacher.service");
 var admin_service_1 = require("./admin/admin.service");
+var student_schema_1 = require("src/student/schemas/student.schema");
+var mongoose_1 = require("@nestjs/mongoose");
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }
     UserModule = __decorate([
         common_1.Module({
+            imports: [
+                mongoose_1.MongooseModule.forFeature([
+                    {
+                        name: 'Student',
+                        schema: student_schema_1.StudentSchema
+                    },
+                ]),
+            ],
             controllers: [admin_controller_1.AdminController, teacher_controller_1.TeacherController],
             providers: [teacher_service_1.TeacherService, admin_service_1.AdminService]
         })
