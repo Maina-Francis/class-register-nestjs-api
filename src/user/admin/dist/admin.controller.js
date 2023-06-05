@@ -84,6 +84,17 @@ var AdminController = /** @class */ (function () {
             });
         });
     };
+    //   delete a student by id
+    AdminController.prototype.deleteStudent = function (studentId) {
+        return __awaiter(this, void 0, Promise, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.studentService.deleteStudent(studentId)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     __decorate([
         common_1.Get('students')
     ], AdminController.prototype, "getStudents");
@@ -96,6 +107,10 @@ var AdminController = /** @class */ (function () {
         common_1.Post(),
         __param(0, common_1.Body())
     ], AdminController.prototype, "createStudent");
+    __decorate([
+        common_1.Delete(':id'),
+        __param(0, common_1.Param('id'))
+    ], AdminController.prototype, "deleteStudent");
     AdminController = __decorate([
         common_1.Controller('admin')
     ], AdminController);

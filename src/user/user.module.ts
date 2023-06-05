@@ -5,6 +5,7 @@ import { TeacherService } from './teacher/teacher.service';
 import { AdminService } from './admin/admin.service';
 import { StudentSchema } from 'src/student/schemas/student.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { StudentService } from 'src/student/student.service';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { MongooseModule } from '@nestjs/mongoose';
     ]),
   ],
   controllers: [AdminController, TeacherController],
-  providers: [TeacherService, AdminService],
+  providers: [TeacherService, AdminService, StudentService],
 })
 export class UserModule {}

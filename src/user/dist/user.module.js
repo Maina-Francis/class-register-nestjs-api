@@ -14,6 +14,7 @@ var teacher_service_1 = require("./teacher/teacher.service");
 var admin_service_1 = require("./admin/admin.service");
 var student_schema_1 = require("src/student/schemas/student.schema");
 var mongoose_1 = require("@nestjs/mongoose");
+var student_service_1 = require("src/student/student.service");
 var UserModule = /** @class */ (function () {
     function UserModule() {
     }
@@ -28,7 +29,7 @@ var UserModule = /** @class */ (function () {
                 ]),
             ],
             controllers: [admin_controller_1.AdminController, teacher_controller_1.TeacherController],
-            providers: [teacher_service_1.TeacherService, admin_service_1.AdminService]
+            providers: [teacher_service_1.TeacherService, admin_service_1.AdminService, student_service_1.StudentService]
         })
     ], UserModule);
     return UserModule;
