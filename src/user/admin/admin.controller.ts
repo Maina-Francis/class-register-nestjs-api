@@ -20,13 +20,14 @@ export class AdminController {
     private readonly studentService: StudentService,
   ) {}
 
+  //Get all students
   @Get('students')
   async getStudents(): Promise<Student[]> {
     return await this.adminService.getStudents();
   }
 
   //   Update a Student
-  @Put(':id')
+  @Put('/student/:id')
   async updateStudent(
     @Param('id') studentId: string,
     @Body() updateStudentDto: UpdateStudentDTO,
@@ -35,7 +36,7 @@ export class AdminController {
   }
 
   //   create a new student
-  @Post()
+  @Post('/student/new')
   async createStudent(
     @Body() createStudentDto: CreateStudentDTO,
   ): Promise<Student> {
@@ -43,7 +44,7 @@ export class AdminController {
   }
 
   //   delete a student by id
-  @Delete(':id')
+  @Delete('/student/:id')
   async deleteStudent(@Param('id') studentId: string): Promise<Student> {
     return await this.studentService.deleteStudent(studentId);
   }
