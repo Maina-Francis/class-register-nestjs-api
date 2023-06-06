@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,43 +56,47 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.TeacherController = void 0;
+exports.TeacherService = void 0;
 var common_1 = require("@nestjs/common");
-var TeacherController = /** @class */ (function () {
-    function TeacherController(teacherService, studentService) {
-        this.teacherService = teacherService;
-        this.studentService = studentService;
+var mongoose_1 = require("@nestjs/mongoose");
+var TeacherService = /** @class */ (function () {
+    function TeacherService(studentModel) {
+        this.studentModel = studentModel;
     }
-    // Get all students
-    TeacherController.prototype.getAllStudents = function () {
-        return __awaiter(this, void 0, Promise, function () {
+    // update student attendance
+    TeacherService.prototype.updateStudentAttendance = function (studentId, attendanceUpdate) {
+        return __awaiter(this, void 0, void 0, function () {
+            var student;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.studentService.getAllStudents()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, this.studentModel.findById(studentId)];
+                    case 1:
+                        student = _a.sent();
+                        if (!student) {
+                            throw new common_1.NotFoundException('Student not found');
+                        }
+                        // Check if the attendance field is present in the update object
+                        if ('attendance' in attendanceUpdate) {
+                            // Update the attendance field of the student
+                            student.attendance = __assign(__assign({}, student.attendance), attendanceUpdate.attendance);
+                        }
+                        else {
+                            throw new common_1.BadRequestException('Only the attendance field can be updated');
+                        }
+                        // Save the updated student to the database
+                        return [4 /*yield*/, student.save()];
+                    case 2:
+                        // Save the updated student to the database
+                        _a.sent();
+                        return [2 /*return*/, student];
                 }
             });
         });
     };
-    //   Update student attendance
-    TeacherController.prototype.updateStudentAttendance = function (studentId, attendanceUpdate) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.teacherService.updateStudentAttendance(studentId, attendanceUpdate)];
-            });
-        });
-    };
-    __decorate([
-        common_1.Get('students')
-    ], TeacherController.prototype, "getAllStudents");
-    __decorate([
-        common_1.Patch('/students/:studentId/attendance'),
-        __param(0, common_1.Param('studentId')),
-        __param(1, common_1.Body())
-    ], TeacherController.prototype, "updateStudentAttendance");
-    TeacherController = __decorate([
-        common_1.Controller('teacher')
-    ], TeacherController);
-    return TeacherController;
+    TeacherService = __decorate([
+        common_1.Injectable(),
+        __param(0, mongoose_1.InjectModel('Student'))
+    ], TeacherService);
+    return TeacherService;
 }());
-exports.TeacherController = TeacherController;
+exports.TeacherService = TeacherService;
